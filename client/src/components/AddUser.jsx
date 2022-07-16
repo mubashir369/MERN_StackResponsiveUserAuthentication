@@ -1,14 +1,14 @@
-import React,{useState} from "react";
-import "./Login.css";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-function Signup() {
+
+function AddUser() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const register = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8080/api/register", {
+    const response = await fetch("http://localhost:5000/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -16,18 +16,16 @@ function Signup() {
         email,
         password,
       }),
-    });
-    const data = response.json();
-    if (data.status === "Ok") {
-      navigate("/login");
-    }
+    })
+      .then(alert("New User Added"))
+      .then(navigate("/admin-dashboard"));
   };
   return (
     <div className="body">
       <div className="wrapper fadeInDown">
         <div id="formContent">
           <div className="fadeIn first">
-            <h1 className="heading">SignUp Form</h1>
+            <h1 className="heading">Add User</h1>
           </div>
           <form onSubmit={register}>
             <input
@@ -36,7 +34,7 @@ function Signup() {
               name="login"
               placeholder="Username"
               value={name}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               type="email"
@@ -44,7 +42,7 @@ function Signup() {
               name="login"
               placeholder="Email ID"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
@@ -52,14 +50,17 @@ function Signup() {
               name="login"
               placeholder="Password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
-            <input type="submit" className="fadeIn fourth" value="Sign Up" />
+            <input type="submit" className="fadeIn fourth" value="Submit" />
           </form>
           <div id="formFooter">
-            <a class="underlineHover" onClick={() => navigate("/login")}>
-              Log in
+            <a
+              class="underlineHover"
+              onClick={() => navigate("/admin-dashboard")}
+            >
+              Back To Home
             </a>
           </div>
         </div>
@@ -68,4 +69,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default AddUser;

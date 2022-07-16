@@ -5,10 +5,11 @@ import "./UserDashboard.css";
 function UserDashboard() {
   const [quote, setQuote] = useState("");
   const [tempQuote, setTempQuote] = useState("");
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
   const updateQuote = async (e) => {
     e.preventDefault();
-    const req = await fetch("http://localhost:8080/api/quote", {
+    const req = await fetch("http://localhost:5000/api/quote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +29,7 @@ function UserDashboard() {
     }
   };
   const populateQuote = async () => {
-    const req = await fetch("http://localhost:8080/api/quote", {
+    const req = await fetch("http://localhost:5000/api/quote", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -37,6 +38,7 @@ function UserDashboard() {
     console.log(data);
     if (data.status == "ok") {
       setQuote(data.quote);
+      setUser(data.user);
     } else {
       alert(data.err);
     }
@@ -51,8 +53,21 @@ function UserDashboard() {
       } else {
         populateQuote();
       }
+    } else {
+      navigate("/login");
     }
   }, []);
+  const logout = (e) => {
+    e.preventDefault();
+    const conf = window.confirm("are you log out");
+    if (conf) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }
+  };
   return (
     <div class="banner">
       <div className="navbar">
@@ -60,10 +75,14 @@ function UserDashboard() {
 
         <ul>
           <li>
-            <a href="">User</a>{" "}
+            <a href="" onClick={(e) => e.preventDefault()}>
+              {user || "No User Found"}
+            </a>
           </li>
           <li className="logout">
-            <a href="">Log Out</a>
+            <a href="" onClick={logout}>
+              Log Out
+            </a>
           </li>
         </ul>
       </div>
