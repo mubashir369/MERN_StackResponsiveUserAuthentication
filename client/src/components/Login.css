@@ -1,5 +1,9 @@
 
-
+.header{
+  display: flex;
+  justify-content: space-around;
+  font-size: small;
+}
 .body {
   font-family: "Poppins", sans-serif;
   height: 100vh;

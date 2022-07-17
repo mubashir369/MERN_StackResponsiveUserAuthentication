@@ -59,7 +59,7 @@ function UserDashboard() {
   }, []);
   const logout = (e) => {
     e.preventDefault();
-    const conf = window.confirm("are you log out");
+    const conf = window.confirm("Are want to logout now");
     if (conf) {
       const token = localStorage.getItem("token");
       if (token) {
