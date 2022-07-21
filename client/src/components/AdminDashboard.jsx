@@ -49,15 +49,15 @@ function AdminDashboard() {
     e.preventDefault();
     const conf = window.confirm("Are want to logout now");
     if (conf) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("AdminToken");
       if (token) {
-        localStorage.removeItem("token");
-        navigate("/login");
+        localStorage.removeItem("AdminToken");
+        navigate("/admin-login");
       }
     }
   };
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("AdminToken");
     if (token) {
       const user = jwtDecode(token);
       if (!user) {
@@ -78,7 +78,7 @@ function AdminDashboard() {
   return (
     <div className="MainDiv">
       <div class="jumbotron text-center">
-        <h3>Users Data</h3>
+        <h3 className="pt-5">Users Data</h3>
       </div>
       <div className="header">
         <button style={{ color: "black" }} onClick={addUser}>

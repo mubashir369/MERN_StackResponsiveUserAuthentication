@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Login.css'
 import {useNavigate} from 'react-router-dom'
 function Login() {
@@ -28,6 +28,12 @@ function Login() {
         }
       });
   }
+  useEffect(()=>{
+    const token=localStorage.getItem('token')
+    if(token){
+      navigate('/user-dashboard')
+    }
+  },[])
   return (
     <div className="body">
       <div className="wrapper fadeInDown">
@@ -40,7 +46,7 @@ function Login() {
               type="email"
               id="login"
               className="fadeIn second"
-             
+             required
               placeholder="Email ID"
               value={email}
               onChange={(e)=>{setEmail(e.target.value)}}
@@ -52,6 +58,7 @@ function Login() {
             
               placeholder="password"
               value={password}
+              required
               onChange={(e)=>{setPassword(e.target.value)}}
             />
             <input type="submit" className="fadeIn fourth" value="Log In" />

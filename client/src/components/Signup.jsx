@@ -34,6 +34,7 @@ function Signup() {
               type="text"
               className="fadeIn second"
               name="login"
+              required
               placeholder="Username"
               value={name}
               onChange={(e)=>setName(e.target.value)}
@@ -42,6 +43,7 @@ function Signup() {
               type="email"
               className="fadeIn second"
               name="login"
+              required
               placeholder="Email ID"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
@@ -49,6 +51,7 @@ function Signup() {
             <input
               type="password"
               className="fadeIn second"
+              required
               name="login"
               placeholder="Password"
               value={password}

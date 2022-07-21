@@ -19,7 +19,7 @@ function AdminLogin() {
       .then((data) => {
         console.log(data);
         if(data.admin){
-          localStorage.setItem('token',data.admin)
+          localStorage.setItem('AdminToken',data.admin)
           alert("Login Success");
           window.location.href = "/admin-dashboard";
         }else{
@@ -40,6 +40,7 @@ function AdminLogin() {
               id="login"
               className="fadeIn second"
               placeholder="Email ID"
+              required
               value={email}
               onChange={(e)=>{setEmail(e.target.value)}}
             />
@@ -49,6 +50,7 @@ function AdminLogin() {
               className="fadeIn third"
               placeholder="password"
               value={password}
+              required
               onChange={(e)=>setPassword(e.target.value)}
             />
             <input type="submit" className="fadeIn fourth" value="Log In" />
