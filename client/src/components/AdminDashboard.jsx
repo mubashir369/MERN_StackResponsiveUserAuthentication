@@ -61,7 +61,7 @@ function AdminDashboard() {
     if (token) {
       const user = jwtDecode(token);
       if (!user) {
-        localStorage.removeItem("token");
+        localStorage.removeItem("AdminToken");
         navigate("/login");
       } else {
         getAllUsers();
